@@ -35,9 +35,6 @@ Contributions to this project are welcome! If you have any ideas for improvement
 
 This project is licensed under the [Apache License 2.0](LICENSE). You are free to use and modify it according to the terms of the license.
 
-## Acknowledgments
-
-I would like to thank my professors and classmates for their support and encouragement in my journey to learn programming.
 
 Happy coding!
 
