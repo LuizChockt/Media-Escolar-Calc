@@ -1,40 +1,61 @@
-# Media-Escolar-Calc
-# School Grade Calculator
+# Calculadora de Média Escolar
 
+Uma ferramenta web de estudo para calcular médias simples ou ponderadas, com notas, pesos e critérios de aprovação configuráveis.
 
-This is a simple web-based school grade calculator project that I created as part of my first-semester coursework for the **Analysis and Systems Development** program. It's designed to help me learn programming in JavaScript (JS) and HTML. While the project is currently basic, I plan to continuously improve it as I advance in my studies.
+O projeto nasceu em 2023, no primeiro semestre de Análise e Desenvolvimento de Sistemas. Esta versão substitui a sequência de `prompt` e mensagens no console por um formulário que permite conferir entradas e resultados na própria página.
 
-## Features
+![Interface da calculadora de médias](./assets/screenshot.png)
 
-- Calculate your school grades easily.
-- Input grades for various subjects.
-- View your overall average grade.
+## O que faz
 
-## Usage
+- Aceita de uma a doze avaliações, com notas entre 0 e 10.
+- Calcula média simples quando todos os pesos são iguais ou ponderada quando diferem.
+- Aceita decimais com ponto ou vírgula e valida campos vazios, notas fora do intervalo e pesos não positivos.
+- Permite configurar as médias mínimas de aprovação e recuperação.
+- Mostra a média e a classificação em texto; o resultado não depende apenas de cor.
+- Usa labels associados aos campos, foco visível e temas claro e escuro.
 
-1. Clone this repository to your local machine.
-2. Open the `index.html` file in a web browser.
-3. Input your grades for different subjects.
-4. Click the "Calculate" button to view your overall average grade.
+## Fórmula e critérios
 
-## Future Enhancements
+```text
+média = soma(nota × peso) / soma(pesos)
+```
 
-I plan to make the following improvements to this project:
+Exemplo: notas **8** e **5**, com pesos **2** e **1**, geram média **7**.
 
-- [ ] Add support for weighted grades.
-- [ ] Implement a more user-friendly interface.
-- [ ] Provide detailed feedback on your grades.
-- [ ] Incorporate additional functionality for GPA calculation.
-- [ ] Allow users to save and load their grade data.
+Os critérios iniciais são: aprovação a partir de 7; recuperação a partir de 5 e abaixo de 7; abaixo de 5, resultado abaixo da média mínima. Esses valores podem ser alterados no formulário. A classificação usa o valor sem arredondar; a exibição usa até quatro casas decimais.
 
-## Contributions
+## Executar
 
-Contributions to this project are welcome! If you have any ideas for improvements or find any issues, please feel free to open an issue or submit a pull request.
+```bash
+git clone https://github.com/LuizChockt/Media-Escolar-Calc.git
+cd Media-Escolar-Calc
+python -m http.server 8000
+```
 
-## License
+Abre **http://localhost:8000**. É necessário servir por HTTP porque a aplicação usa módulos JavaScript. Também é possível usar Live Server.
 
-This project is licensed under the [Apache License 2.0](LICENSE). You are free to use and modify it according to the terms of the license.
+## Testar
 
+```bash
+# Node.js 22 ou superior; sem dependências npm
+npm test
+```
 
-Happy coding!
+Os testes verificam médias simples e ponderadas, decimais, limites de classificação, critérios alterados e entradas inválidas. O workflow incluído executa os testes em pushes e pull requests.
 
+## Organização
+
+- `index.html`: estrutura e formulário.
+- `styles.css`: interface responsiva e temas.
+- `src/grades.mjs`: validação e cálculo, sem dependência do DOM.
+- `src/app.mjs`: campos dinâmicos, eventos e exibição.
+- `tests/grades.test.mjs`: testes de comportamento.
+
+## Limites
+
+Esta ferramenta simula regras baseadas na média. Não considera frequência, substituição de notas, arredondamentos específicos da instituição ou cálculo de prova final. As notas não são persistidas nem transmitidas para um servidor.
+
+## Licença
+
+[Apache License 2.0](./LICENSE), preservada do projeto original. A fonte Manrope segue a licença em [assets/OFL-Manrope.txt](./assets/OFL-Manrope.txt).

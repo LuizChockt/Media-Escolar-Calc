@@ -1,38 +1,36 @@
-<!DOCTYPE html>
-<html>
-
+<!doctype html>
+<html lang="pt-BR">
 <head>
-
-
-  <title>Calculadora Média Escolar</title>
-
-  <script>
-
-
-    const n1 = Number(prompt('Digite a nota 1'))
-    const n2 = Number(prompt('Digite a nota 2'))
-    const n3 = Number(prompt('Digite a nota 3'))
-    const n4 = Number(prompt('Digite a nota 4'))
-
-
-    const soma = n1 + n2 + n3 + n4
-    const media = soma / 4
-    console.log('A média é ' + media)
-
-    if (media >= 7) {
-
-      console.log('Aprovado!')
-    } else if (media < 5) {
-      console.log('Reprovado :(')
-    } else {
-      console.log('Recuperação. Estude mais para passar')
-
-    }
-
-  </script>
-
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Calcule médias escolares simples ou ponderadas, com notas e critérios configuráveis.">
+  <meta name="theme-color" content="#161B1D">
+  <title>Média Escolar — Luiz Chockt</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="src/app.mjs"></script>
 </head>
-
-
+<body>
+  <a class="skip-link" href="#grade-form">Ir para o formulário</a>
+  <header class="site-header"><a class="wordmark" href="https://github.com/LuizChockt">Luiz Chockt<span aria-hidden="true">.</span></a><a class="source-link" href="https://github.com/LuizChockt/Media-Escolar-Calc">Ver código <span aria-hidden="true">↗</span></a></header>
+  <main class="layout grades-layout">
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">JAVASCRIPT / PROJETO DE ESTUDO</p>
+      <h1 id="page-title">Tuas notas.<br><span>Em perspectiva.</span></h1>
+      <p class="lead">Transforma notas e pesos em uma média clara. Ajusta os critérios e entende teu resultado.</p>
+      <ul class="features"><li>Média simples ou ponderada</li><li>De uma a doze avaliações</li><li>Critérios de aprovação configuráveis</li></ul>
+      <p class="fine-print">Esta é uma simulação por média. Confere os critérios da tua instituição, incluindo recuperação e frequência.</p>
+    </section>
+    <section class="panel" aria-labelledby="form-title">
+      <div class="panel-heading"><h2 id="form-title">Média escolar</h2><span class="chip">02</span></div>
+      <form id="grade-form" novalidate>
+        <fieldset><legend>Avaliações</legend><div id="evaluations" class="evaluation-list"></div><button class="text-button add-button" type="button" id="add-evaluation">+ Adicionar avaliação</button></fieldset>
+        <fieldset class="criteria"><legend>Critérios</legend><div class="two-columns"><label for="passing">Média para aprovação<input id="passing" name="passing" type="text" inputmode="decimal" value="7" maxlength="20" aria-describedby="message"></label><label for="recovery">Mínimo para recuperação<input id="recovery" name="recovery" type="text" inputmode="decimal" value="5" maxlength="20" aria-describedby="message"></label></div></fieldset>
+        <div class="form-actions"><button type="submit" class="primary-button">Calcular média <span aria-hidden="true">↗</span></button><button type="button" class="secondary-button" id="reset-grades">Limpar</button></div>
+        <div class="result-box grade-result" role="status" aria-live="polite" aria-atomic="true"><span>Média ponderada</span><output id="average">—</output><p id="classification">Pronto para calcular</p></div>
+        <p class="status" id="message" role="status">Notas de 0 a 10. Pesos maiores que zero.</p>
+      </form>
+    </section>
+  </main>
+  <footer>HTML, CSS e JavaScript. <a href="https://github.com/LuizChockt">Um projeto de Luiz Chockt.</a></footer>
+</body>
 </html>
