@@ -4,6 +4,8 @@ Uma ferramenta web de estudo para calcular médias simples ou ponderadas, com no
 
 O projeto nasceu em 2023, no primeiro semestre de Análise e Desenvolvimento de Sistemas. Esta versão substitui a sequência de `prompt` e mensagens no console por um formulário que permite conferir entradas e resultados na própria página.
 
+[**Experimentar a calculadora de médias →**](https://luizchockt.github.io/Media-Escolar-Calc/)
+
 ![Interface da calculadora de médias](./assets/screenshot.png)
 
 ## O que faz
