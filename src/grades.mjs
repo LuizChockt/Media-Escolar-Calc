@@ -24,6 +24,8 @@ export function calculateAverage(rows, options = {}) {
   }
   let total = 0;
   let weights = 0;
+  let minGrade = 10;
+  let maxGrade = 0;
   rows.forEach((row, index) => {
     const grade = parseDecimal(row.grade, `Nota ${index + 1}`, `grade-${index}`);
     const weight = parseDecimal(row.weight ?? 1, `Peso ${index + 1}`, `weight-${index}`);
@@ -31,9 +33,14 @@ export function calculateAverage(rows, options = {}) {
     if (weight <= 0) throw new GradeError(`Peso ${index + 1}: usa um valor maior que zero.`, `weight-${index}`);
     total += grade * weight;
     weights += weight;
+    minGrade = Math.min(minGrade, grade);
+    maxGrade = Math.max(maxGrade, grade);
   });
-  const average = total / weights;
-  if (!Number.isFinite(average)) throw new GradeError('Os pesos excedem o limite numérico.');
+  if (!Number.isFinite(total) || !Number.isFinite(weights)) {
+    throw new GradeError('Os pesos excedem o limite numérico.');
+  }
+  // Identical grades have the same weighted average, even with decimal weights.
+  const average = minGrade === maxGrade ? maxGrade : total / weights;
   const status = average >= passing ? 'Aprovado' : average >= recovery ? 'Recuperação' : 'Abaixo da média mínima';
   return { average, status, passing, recovery, count: rows.length };
 }

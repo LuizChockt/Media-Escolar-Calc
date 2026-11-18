@@ -19,6 +19,14 @@ test('uses exact boundary values without rounding the classification', () => {
   assert.equal(at(4.999), 'Abaixo da média mínima');
   assert.equal(at(0), 'Abaixo da média mínima');
 });
+test('identical grades stay at the threshold with decimal weights', () => {
+  for (const [grade, status] of [[7, 'Aprovado'], [5, 'Recuperação']]) {
+    const rows = [{ grade, weight: '0,1' }, { grade, weight: '0,2' }];
+    const result = calculateAverage(rows);
+    assert.equal(result.average, grade);
+    assert.equal(result.status, status);
+  }
+});
 test('supports configurable criteria', () => {
   assert.equal(calculateAverage([{ grade: 6 }], { passing: 6, recovery: 4 }).status, 'Aprovado');
 });
@@ -37,6 +45,11 @@ test('rejects zero or negative weights, impossible criteria and invalid row coun
 });
 test('rejects nonfinite arithmetic and malformed decimal values', () => {
   assert.throws(() => calculateAverage([{ grade: 10, weight: Number.MAX_VALUE }, { grade: 10, weight: Number.MAX_VALUE }]));
+  const overflowedWeights = [
+    { grade: 0, weight: Number.MAX_VALUE },
+    { grade: 1, weight: Number.MAX_VALUE },
+  ];
+  assert.throws(() => calculateAverage(overflowedWeights), /limite numérico/);
   assert.throws(() => parseDecimal('7,5,2'));
   assert.equal(parseDecimal(' 7,5 '), 7.5);
 });
